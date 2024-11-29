@@ -6,11 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <!----Font awesome cdn  font icon css -->
+    <!-- Font awesome cdn for font icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 <body>
-     <div class="hero-header">
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2>Contact Information</h2>
+            <ul class="contact-info">
+                <li><strong>Name:</strong> Krishna Singh</li>
+                <li><strong>Phone:</strong> +91 9026316048</li>
+                <li><strong>Email:</strong> <a href="mailto:krishnasinghprojects@gmail.com">krishnasinghprojects@gmail.com</a></li>
+                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/krishna-singh-22827833a/" target="_blank">linkedin.com/krishnasingh</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="hero-header">
         <div class="wrapper">
             <header>
                 <div class="logo">
@@ -24,10 +37,15 @@
                     </div>
                     <ul class="navlinks">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Projects</a></li>
+                        <li class="dropdown">
+                            <a href="#">Projects</a>
+                            <ul class="dropdown-content">
+                                <li><a href="https://krishnasingh1920.github.io/Snake/">Snake</a></li>
+                                <li><a href="https://krishnasingh1920.github.io/TicTacToe/">Tic Tac Toe</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#">Resume</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#" id="contactBtn">Contact</a></li>
                     </ul>
                 </nav>
             </header>
@@ -43,39 +61,77 @@
 
                     <div class="btn-group">
                        <a href="#" class="btn active">Download CV</a>
-                       <a href="#" class="btn">Contact</a>
+                       <a href="#" class="btn" id="contactBtn">Contact</a>
                     </div>
 
                     <div class="social">
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-dribbble"></i></a>
-                        <a href="#"><i class="fa-brands fa-pintrest"></i></a>
+                        <a href="https://www.chess.com/member/nether_god" target="_blank"><i class="fa-solid fa-chess"></i></a>
+                        <a href="https://www.linkedin.com/in/krishna-singh-22827833a/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/KrishnaSingh1920" target="_blank"><i class="fa-brands fa-github"></i></a>
                     </div>
                  </div>
             </div>
         </div>
-     </div>
-     <!---typed js for typing text effect-->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
-     <script>
-        /** creating button click show hide navbar **/
-        var togglebtn=document.querySelector(".togglebtn");
-        var nav=document.querySelector(".navlinks");
-        var links=document.querySelector(".navlinks li");
 
-        togglebtn.addEventListener("click", function(){
+     </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
+    <script>
+        /** creating button click show hide navbar **/
+        var togglebtn = document.querySelector(".togglebtn");
+        var nav = document.querySelector(".navlinks");
+
+        togglebtn.addEventListener("click", function() {
             this.classList.toggle("click");
             nav.classList.toggle("open");
-        })
+        });
 
-        var typed=new Typed(".input",{
-            strings:["Frontend Developer","UX Designer","Web Developer"],
-            typedSpeed:70,
-            backSpeed:55,
-            loop:true
-        })
-     </script>
+        var typed = new Typed(".input", {
+            strings: ["Frontend Developer", "UX Designer", "Web Developer"],
+            typedSpeed: 70,
+            backSpeed: 55,
+            loop: true
+        });
+
+        const popup = document.getElementById('popup');
+        const contactBtns = document.querySelectorAll('#contactBtn');
+        const closeBtn = document.querySelector('.popup-content .close');
+
+        contactBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                popup.classList.remove('hidden');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            popup.classList.add('hidden');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                popup.classList.add('hidden');
+            }
+        });
+
+        // Get the dropdown button and content
+const dropdown = document.querySelector('.dropdown');
+const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+// Toggle the dropdown on click
+dropdown.addEventListener('click', function() {
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+});
+
+// Optional: Close the dropdown if clicked outside
+document.addEventListener('click', function(event) {
+    if (!dropdown.contains(event.target)) {
+        dropdownContent.style.display = 'none';
+    }
+});
+
+    </script>
 </body>
 </html>
